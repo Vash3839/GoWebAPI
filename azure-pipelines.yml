@@ -9,6 +9,11 @@ steps:
   inputs:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: Go@0
+  inputs:
+    command: 'get'
+    arguments: '-v all'
+    workingDirectory: '$(System.DefaultWorkingDirectory)' 
 
 - task: PublishBuildArtifacts@1
   inputs:
@@ -17,9 +22,12 @@ steps:
     
 - task: GoTool@0
   inputs:
-    version: '1.15'
+    version: '1.23.0'
 
 - task: Go@0
   inputs:
     command: 'build'
     workingDirectory: '$(Build.ArtifactStagingDirectory)/main'
+- task: PublishBuildArtifacts@1
+  inputs:
+     artifactName: Artefatto
